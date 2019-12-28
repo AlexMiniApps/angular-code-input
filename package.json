@@ -10,6 +10,13 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexMiniApps/angular-code-input.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AlexMiniApps/angular-code-input/issues"
+  },
   "private": false,
   "dependencies": {
     "@angular/animations": "~8.2.14",
