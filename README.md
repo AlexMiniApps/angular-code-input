@@ -5,6 +5,10 @@ Ionic 4+ is supported, can be used in iOS and Android.
 
 Preview
 
+![](https://github.com/AlexMiniApps/angular-code-input/blob/master/preview1.gif)
+
+![](https://github.com/AlexMiniApps/angular-code-input/blob/master/preview2.gif)
+
 ## Installation
 
     $ npm install --save angular-code-input
