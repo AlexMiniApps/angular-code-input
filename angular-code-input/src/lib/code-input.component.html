@@ -1,0 +1,12 @@
+<span *ngFor="let holder of placeHolders; index as i"
+      class="custom-class"
+      [class.empty]="state.isEmpty"
+      [class.code-hidden]="isCodeHidden">
+  <input #input
+         (input)="onInput($event, i)"
+         (keydown)="onKeydown($event, i)"
+         type="tel"/>
+</span>
+
+
+

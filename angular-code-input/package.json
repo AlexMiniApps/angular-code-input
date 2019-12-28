@@ -1,0 +1,12 @@
+{
+  "name": "angular-code-input",
+  "version": "1.0.0",
+  "description": "Code or pin code input for angular 7+ / ionic 4 + projects",
+  "keywords": ["angular", "pincode", "angular-pincode",  "otp", "code-input", "angular-otp", "ionic-otp", "ionic-code-input", "ionic-pincode"],
+  "author": "Alexander Dmitrenko",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}
