@@ -27,5 +27,8 @@
         "dist/code-input/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }
