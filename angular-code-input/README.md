@@ -9,6 +9,14 @@ Preview
 
 ![](https://github.com/AlexMiniApps/angular-code-input/blob/master/preview2.gif)
 
+## Supported platforms
+
+<b>Angular</b> 7, 8, 9 +<br />
+<b>Ionic</b> 4, 5 +<br />
+Mobile browsers and WebViews on: <b>Android and iOS</b><br />
+Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
+Other browsers:  <b>Edge v.41 - 44</b> (without code hidden feature)
+
 ## Installation
 
     $ npm install --save angular-code-input
@@ -97,9 +105,16 @@ Example with only bottom borders:
 
 #### Component options
 
-`codeLength: number` - length of input code <br />
-`isCodeHidden: boolean` - when `true` inputted code chars will be shown as asterisks (points)<br />
-`isNonDigitsCode: boolean` - when `true` inputted code can contain any char and not only digits from 0 to 9 <br />
+<b>`codeLength: number`</b> - length of input code <br />
+<b>`isCodeHidden: boolean`</b> - when `true` inputted code chars will be shown as asterisks (points)<br />
+<b>`isNonDigitsCode: boolean`</b> - when `true` inputted code can contain any char and not only digits from 0 to 9.
+If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored<br />
+<b>`isPrevFocusableAfterClearing: boolean`</b> - when `true` after the input value deletion the caret will be moved 
+to the previous input immediately. If `false` then after the input value deletion the caret will 
+stay on the current input and be moved to the previous input only if the current input is empty<br />
+<b>`inputType: string`</b> - type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'`<br />
+<b>`code: string | number`</b> - the input code value for the component. If the parameter 
+contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored</b> <br />
 
 #### Events
 
