@@ -105,16 +105,16 @@ Example with only bottom borders:
 
 #### Component options
 
-<b>`codeLength: number`</b> - length of input code <br />
-<b>`isCodeHidden: boolean`</b> - when `true` inputted code chars will be shown as asterisks (points)<br />
+<b>`codeLength: number`</b> - length of input code <br /><br />
+<b>`isCodeHidden: boolean`</b> - when `true` inputted code chars will be shown as asterisks (points)<br /><br />
 <b>`isNonDigitsCode: boolean`</b> - when `true` inputted code can contain any char and not only digits from 0 to 9.
-If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored<br />
+If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored<br /><br />
 <b>`isPrevFocusableAfterClearing: boolean`</b> - when `true` after the input value deletion the caret will be moved 
 to the previous input immediately. If `false` then after the input value deletion the caret will 
-stay on the current input and be moved to the previous input only if the current input is empty<br />
-<b>`inputType: string`</b> - type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'`<br />
+stay on the current input and be moved to the previous input only if the current input is empty<br /><br />
+<b>`inputType: string`</b> - type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'`<br /><br />
 <b>`code: string | number`</b> - the input code value for the component. If the parameter 
-contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored</b> <br />
+contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored</b> <br /><br />
 
 #### Events
 
