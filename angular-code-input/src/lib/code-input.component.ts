@@ -3,41 +3,41 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input,
+  Input, OnChanges,
   OnInit,
   Output,
-  QueryList,
+  QueryList, SimpleChanges,
   ViewChildren
 } from '@angular/core';
 
-/**
- * Generated class for the CodeInputComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+enum InputState {
+  ready = 0,
+  reset = 1
+}
+
 @Component({
   selector: 'code-input',
   templateUrl: 'code-input.component.html',
   styleUrls: ['./code-input.component.scss']
 })
-export class CodeInputComponent implements AfterViewInit, OnInit {
+export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
 
   @ViewChildren('input') inputsList: QueryList<ElementRef>;
 
-  @Input() readonly codeLength: number;
-  @Input() readonly isCodeHidden: boolean;
-  @Input() readonly isNonDigitsCode: boolean;
+  @Input() readonly codeLength = 4;
+  @Input() readonly isNonDigitsCode = false;
+  @Input() readonly isCodeHidden = false;
+  @Input() readonly isPrevFocusableAfterClearing = true;
+  @Input() readonly inputType = 'tel';
+  @Input() readonly code?: string | number;
 
   @Output() codeChanged = new EventEmitter<string>();
   @Output() codeCompleted = new EventEmitter<string>();
 
   public placeHolders: number[];
-  public state = {
-    isEmpty: true
-  };
 
   private inputs: HTMLInputElement[] = [];
+  private inputsStates: InputState[] = [];
 
   constructor() {
   }
@@ -53,7 +53,17 @@ export class CodeInputComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     this.inputsList.forEach((item) => {
       this.inputs.push(item.nativeElement);
+      this.inputsStates.push(InputState.ready);
     });
+
+    // the @Input code might have value. Checking
+    this.onInputCodeChanges();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.code) {
+      this.onInputCodeChanges();
+    }
   }
 
   /**
@@ -63,21 +73,22 @@ export class CodeInputComponent implements AfterViewInit, OnInit {
   onInput(e: any, i: number): void {
     const next = i + 1;
     const target = e.target;
-    const data = e.data || target.value;
+    const value = e.data || target.value;
 
-    if (data === null || data === undefined || !data.toString().length) {
+    if (this.isEmpty(value)) {
       return;
     }
 
     // only digits are allowed if isNonDigitsCode flag is absent/false
-    if (!this.isNonDigitsCode && !this.isDigitsData(data)) {
+    if (!this.canInputValue(value)) {
       e.preventDefault();
       e.stopPropagation();
       this.setInputValue(target, null);
+      this.setStateForInput(target, InputState.reset);
       return;
     }
 
-    this.setInputValue(target, data.toString().charAt(0));
+    this.setInputValue(target, value.toString().charAt(0));
     this.emitChanges();
 
     if (next > this.codeLength - 1) {
@@ -89,25 +100,64 @@ export class CodeInputComponent implements AfterViewInit, OnInit {
   }
 
   async onKeydown(e: any, i: number): Promise<void> {
+    const target = e.target;
+    const isTargetEmpty = this.isEmpty(target.value);
+    const prev = i - 1;
+
     // processing only backspace events
     const isBackspaceKey = await this.isBackspaceKey(e);
     if (!isBackspaceKey) {
       return;
     }
 
-    const prev = i - 1;
-    const target = e.target;
-
     e.preventDefault();
 
     this.setInputValue(target, null);
-    this.emitChanges();
+    if (!isTargetEmpty) {
+      this.emitChanges();
+    }
 
     if (prev < 0) {
       return;
     }
 
-    this.inputs[prev].focus();
+    if (isTargetEmpty || this.isPrevFocusableAfterClearing) {
+      this.inputs[prev].focus();
+    }
+  }
+
+  isInputElementEmptyAt(index: number): boolean {
+    const input = this.inputs[index];
+    if (!input) {
+      return true;
+    }
+
+    return this.isEmpty(input.value);
+  }
+
+  private onInputCodeChanges(): void {
+    if (!this.inputs.length) {
+      return;
+    }
+
+    if (this.isEmpty(this.code)) {
+      this.inputs.forEach((input: HTMLInputElement) => {
+        this.setInputValue(input, null);
+      });
+      return;
+    }
+
+    const chars = this.code.toString().trim().split('');
+    // checking if all the values are correct
+    for (const char of chars) {
+      if (!this.canInputValue(char)) {
+        return;
+      }
+    }
+
+    this.inputs.forEach((input: HTMLInputElement, index: number) => {
+      this.setInputValue(input, chars[index]);
+    });
   }
 
   private emitChanges(): void {
@@ -118,20 +168,14 @@ export class CodeInputComponent implements AfterViewInit, OnInit {
     let code = '';
 
     for (const input of this.inputs) {
-      if (input.value !== null && input.value !== undefined) {
+      if (!this.isEmpty(input.value)) {
         code += input.value;
       }
     }
 
     this.codeChanged.emit(code);
 
-    if (code.length < this.codeLength) {
-      code = null;
-    }
-
-    this.state.isEmpty = (code === null);
-
-    if (code !== null) {
+    if (code.length >= this.codeLength) {
       this.codeCompleted.emit(code);
     }
   }
@@ -149,19 +193,47 @@ export class CodeInputComponent implements AfterViewInit, OnInit {
 
     return new Promise<boolean>((resolve) => {
       setTimeout(() => {
+        const input = e.target;
+        const isReset = this.getStateForInput(input) === InputState.reset;
+        if (isReset) {
+          this.setStateForInput(input, InputState.ready);
+        }
         // if backspace key pressed the caret will have position 0 (for single value field)
-        resolve(e.target.selectionStart === 0);
+        resolve(input.selectionStart === 0 && !isReset);
       });
     });
   }
 
-  private isDigitsData(data: any): boolean {
-    return /^[0-9]+$/.test(data.toString());
+  private setInputValue(input: HTMLInputElement, value: any): void {
+    const isEmpty = this.isEmpty(value);
+    input.value = isEmpty ? null : value;
+    input.className = isEmpty ? '' : 'has-value';
   }
 
-  private setInputValue(input: HTMLInputElement, value: any): void {
-    const isNonEmpty = value !== null && value !== undefined && value.toString().length;
-    input.value = value;
-    input.className = isNonEmpty ? 'has-value' : '';
+  private canInputValue(value: any): boolean {
+    if (this.isEmpty(value)) {
+      return false;
+    }
+
+    const isDigitsValue = /^[0-9]+$/.test(value.toString());
+    return isDigitsValue || this.isNonDigitsCode;
+  }
+
+  private setStateForInput(input: HTMLInputElement, state: InputState): void {
+    const index = this.inputs.indexOf(input);
+    if (index < 0) {
+      return;
+    }
+
+    this.inputsStates[index] = state;
+  }
+
+  private getStateForInput(input: HTMLInputElement): InputState | undefined {
+    const index = this.inputs.indexOf(input);
+    return this.inputsStates[index];
+  }
+
+  private isEmpty(value: any): boolean {
+    return  value === null || value === undefined || !value.toString().length;
   }
 }
