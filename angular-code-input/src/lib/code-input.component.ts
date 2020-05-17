@@ -3,10 +3,12 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   Output,
-  QueryList, SimpleChanges,
+  QueryList,
+  SimpleChanges,
   ViewChildren
 } from '@angular/core';
 
@@ -97,6 +99,43 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
     }
 
     this.inputs[next].focus();
+  }
+
+  onPaste(e: ClipboardEvent, i: number): void {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const data = e.clipboardData?.getData('text');
+
+    if (this.isEmpty(data)) {
+      return;
+    }
+
+    // Convert paste text into iterable
+    const values = data.split('');
+    let index = 0;
+
+    for (const val of values) {
+      const target = this.inputs[i + index];
+
+      // Cancel the loop when a value cannot be used
+      if (!this.canInputValue(val)) {
+        this.setInputValue(target, null);
+        this.setStateForInput(target, InputState.reset);
+        return;
+      }
+
+      this.setInputValue(target, val.toString());
+
+      // Emit changes when we have reached the last input or we are at the last cycle of our values array
+      if (i + index + 1 > this.codeLength - 1 || index >= values.length - 1) {
+        target.blur();
+        this.emitChanges();
+        return;
+      }
+
+      index += 1;
+    }
   }
 
   async onKeydown(e: any, i: number): Promise<void> {
