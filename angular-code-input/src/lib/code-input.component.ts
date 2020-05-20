@@ -105,7 +105,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
     e.preventDefault();
     e.stopPropagation();
 
-    const data = e.clipboardData?.getData('text');
+    const data = e.clipboardData ? e.clipboardData.getData('text') : undefined;
 
     if (this.isEmpty(data)) {
       return;
@@ -113,29 +113,30 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
 
     // Convert paste text into iterable
     const values = data.split('');
-    let index = 0;
+    let valIndex = 0;
 
-    for (const val of values) {
-      const target = this.inputs[i + index];
+    for (let j = i; j < this.inputs.length; j++) {
+      // The values end is reached. Loop exit
+      if (valIndex === values.length) {
+        break;
+      }
+
+      const input = this.inputs[j];
+      const val = values[valIndex];
 
       // Cancel the loop when a value cannot be used
       if (!this.canInputValue(val)) {
-        this.setInputValue(target, null);
-        this.setStateForInput(target, InputState.reset);
+        this.setInputValue(input, null);
+        this.setStateForInput(input, InputState.reset);
         return;
       }
 
-      this.setInputValue(target, val.toString());
-
-      // Emit changes when we have reached the last input or we are at the last cycle of our values array
-      if (i + index + 1 > this.codeLength - 1 || index >= values.length - 1) {
-        target.blur();
-        this.emitChanges();
-        return;
-      }
-
-      index += 1;
+      this.setInputValue(input, val.toString());
+      valIndex++;
     }
+
+    this.inputs[i].blur();
+    this.emitChanges();
   }
 
   async onKeydown(e: any, i: number): Promise<void> {
