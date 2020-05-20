@@ -1,7 +1,8 @@
 # Code/pincode input component for angular 
 
-Code (number/chars) input component for angular 7+ projects.<br />
-Ionic 4+ is supported, can be used in iOS and Android.
+Code (number/chars) input component for Angular 7, 8, 9 + projects.<br />
+Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
+Clipboard events are supported.
 
 Preview
 

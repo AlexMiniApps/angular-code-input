@@ -1,3 +1,6 @@
+# 1.2.0 (20.05.2020)
+**Note:** Have added the ability to paste code from the clipboard. 
+
 # 1.1.0 (04.03.2020)
 **Note:** Have added to the component new input props - code, isPrevFocusableAfterClearing, inputType. 
 Minor refactoring. 
