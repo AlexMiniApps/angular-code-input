@@ -30,6 +30,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() readonly isPrevFocusableAfterClearing = true;
   @Input() readonly inputType = 'tel';
   @Input() readonly code?: string | number;
+  @Input() readonly inputMode?: string;
 
   @Output() codeChanged = new EventEmitter<string>();
   @Output() codeCompleted = new EventEmitter<string>();
