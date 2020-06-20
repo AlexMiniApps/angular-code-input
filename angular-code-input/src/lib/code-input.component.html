@@ -2,6 +2,7 @@
       [class.empty]="isInputElementEmptyAt(i)"
       [class.code-hidden]="isCodeHidden">
   <input #input
+         (click)="onClick($event)"
          (paste)="onPaste($event, i)"
          (input)="onInput($event, i)"
          (keydown)="onKeydown($event, i)"

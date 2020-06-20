@@ -30,6 +30,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() readonly isNonDigitsCode = false;
   @Input() readonly isCodeHidden = false;
   @Input() readonly isPrevFocusableAfterClearing = true;
+  @Input() readonly isFocusingOnLastByClickIfFilled = false;
   @Input() readonly inputType = 'tel';
   @Input() readonly code?: string | number;
 
@@ -71,6 +72,29 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
   /**
    * Methods
    */
+
+  onClick(e: any): void {
+    // handle click events only if the the prop is enabled
+    if (!this.isFocusingOnLastByClickIfFilled) {
+      return;
+    }
+
+    const target = e.target;
+    const last = this.inputs[this.codeLength - 1];
+    // already focused
+    if (target === last) {
+      return;
+    }
+
+    // check filling
+    const isFilled = this.getCurrentFilledCode().length >= this.codeLength;
+    if (!isFilled) {
+      return;
+    }
+
+    // focusing on the last input if is filled
+    setTimeout(() => last.focus());
+  }
 
   onInput(e: any, i: number): void {
     const next = i + 1;
@@ -205,6 +229,16 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   private emitCode(): void {
+    const code = this.getCurrentFilledCode();
+
+    this.codeChanged.emit(code);
+
+    if (code.length >= this.codeLength) {
+      this.codeCompleted.emit(code);
+    }
+  }
+
+  private getCurrentFilledCode(): string {
     let code = '';
 
     for (const input of this.inputs) {
@@ -213,11 +247,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
       }
     }
 
-    this.codeChanged.emit(code);
-
-    if (code.length >= this.codeLength) {
-      this.codeCompleted.emit(code);
-    }
+    return code;
   }
 
   private isBackspaceKey(e: any): Promise<boolean> {
