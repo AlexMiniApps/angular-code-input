@@ -111,10 +111,11 @@ Example with only bottom borders:
 | Property  | Type   | Default |  Description |         
 |----------|:-------:|:-----:|----------|
 | <b>`codeLength`</b> | number | 4 | Length of input code |
+| <b>`inputType`</b> | string | tel | Type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'` |
 | <b>`isCodeHidden`</b> | boolean | false | When `true` inputted code chars will be shown as asterisks (points) |
 | <b>`isNonDigitsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored |
 | <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
-| <b>`inputType`</b> | string | tel | Type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'` |
+| <b>`isFocusingOnLastByClickIfFilled`</b> | boolean | false | When `true` and the code is filled then the focus will be moved to the last input element when clicked |
 | <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored |
 
 #### Events

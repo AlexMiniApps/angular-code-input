@@ -1,3 +1,7 @@
+# 1.2.1 (20.06.2020)
+**Note:** Have added the prop isFocusingOnLastByClickIfFilled for focusing on the last input box 
+if the code is full, and any input box clicked. 
+
 # 1.2.0 (20.05.2020)
 **Note:** Have added the ability to paste code from the clipboard. 
 
