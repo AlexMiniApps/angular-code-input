@@ -70,19 +70,21 @@ It is possible to configure the component via CSS vars
 
 CSS vars:
 
-`--text-security-type: disc;` - text presentation type when the isCodeHidden is enabled<br />
-`--item-spacing: 4px;` - horizontal space between input items  <br />
-`--item-height: 4.375em;` - height of input items <br />
-`--item-border: 1px solid #dddddd;` - border of input item for an empty value <br />
-`--item-border-bottom: 1px solid #dddddd;` - bottom border of input item for an empty value <br />
-`--item-border-has-value: 1px solid #dddddd;` - border of input item with a value <br />
-`--item-border-bottom-has-value: 1px solid #dddddd;` - bottom border of input item with a value <br />
-`--item-border-focused: 1px solid #dddddd;` - border of input item when focused <br />
-`--item-border-bottom-focused: 1px solid #dddddd;` - bottom border of input item when focused <br />
-`--item-shadow-focused: 0px 1px 5px rgba(221, 221, 221, 1);` - shadow of input item when focused <br />
-`--item-border-radius: 5px;` - border radius of input item <br />
-`--item-background: transparent;` - input item background  <br />
-`--color: #171516;` - text color of input items <br />
+| CSS Var  | Description        |          
+|----------|--------------------|
+| `--text-security-type: disc;` | Text presentation type when the isCodeHidden is enabled |
+| `--item-spacing: 4px;` | Horizontal space between input items |
+| `--item-height: 4.375em;` | Height of input items |
+| `--item-border: 1px solid #dddddd;` | Border of input item for an empty value |
+| `--item-border-bottom: 1px solid #dddddd;` | Bottom border of input item for an empty value |
+| `--item-border-has-value: 1px solid #dddddd;` | Border of input item with a value |
+| `--item-border-bottom-has-value: 1px solid #dddddd;` | Bottom border of input item with a value |
+| `--item-border-focused: 1px solid #dddddd;` | Border of input item when focused |
+| `--item-border-bottom-focused: 1px solid #dddddd;` | Bottom border of input item when focused |
+| `--item-shadow-focused: 0px 1px 5px rgba(221, 221, 221, 1);` | Shadow of input item when focused |
+| `--item-border-radius: 5px;` | Border radius of input item |
+| `--item-background: transparent;` | Input item background |
+| `--color: #171516;` | Text color of input items |
 
 Example with only bottom borders:
 
@@ -106,19 +108,18 @@ Example with only bottom borders:
 
 #### Component options
 
-<b>`codeLength: number`</b> - length of input code <br /><br />
-<b>`isCodeHidden: boolean`</b> - when `true` inputted code chars will be shown as asterisks (points)<br /><br />
-<b>`isNonDigitsCode: boolean`</b> - when `true` inputted code can contain any char and not only digits from 0 to 9.
-If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored<br /><br />
-<b>`isPrevFocusableAfterClearing: boolean`</b> - when `true` after the input value deletion the caret will be moved 
-to the previous input immediately. If `false` then after the input value deletion the caret will 
-stay on the current input and be moved to the previous input only if the current input is empty<br /><br />
-<b>`inputType: string`</b> - type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'`<br /><br />
-<b>`code: string | number`</b> - the input code value for the component. If the parameter 
-contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored</b> <br /><br />
+| Property  | Type   | Default |  Description |         
+|----------|:-------:|:-----:|----------|
+| <b>`codeLength`</b> | number | 4 | Length of input code |
+| <b>`isCodeHidden`</b> | boolean | false | When `true` inputted code chars will be shown as asterisks (points) |
+| <b>`isNonDigitsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored |
+| <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
+| <b>`inputType`</b> | string | tel | Type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'` |
+| <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored |
 
 #### Events
 
-`codeChanged` - will be called every time when a user changed the code <br />
-`codeCompleted` - will be called only if a user entered full code
-
+| Event  | Description        |          
+|----------|--------------------|
+| `codeChanged` | Will be called every time when a user changed the code |
+| `codeCompleted` | Will be called only if a user entered full code |
