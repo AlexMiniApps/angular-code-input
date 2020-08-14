@@ -1,8 +1,8 @@
 # Code/pincode input component for angular 
 
-Code (number/chars) input component for Angular 7, 8, 9 + projects.<br />
+Robust and <b>tested</b> code (number/chars) input component for Angular 7, 8, 9, 10 + projects.<br />
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
-Clipboard events are supported.
+<b>Clipboard</b> events are supported.
 
 Preview
 
@@ -12,9 +12,9 @@ Preview
 
 ## Supported platforms
 
-<b>Angular</b> 7, 8, 9 +<br />
+<b>Angular</b> 7, 8, 9, 10 +<br />
 <b>Ionic</b> 4, 5 +<br />
-Mobile browsers and WebViews on: <b>Android and iOS</b><br />
+Mobile browsers and WebViews on: <b>Android</b> and <b>iOS</b><br />
 Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
 Other browsers:  <b>Edge v.41 - 44</b> (without code hidden feature)
 
@@ -116,6 +116,7 @@ Example with only bottom borders:
 | <b>`isNonDigitsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored |
 | <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
 | <b>`isFocusingOnLastByClickIfFilled`</b> | boolean | false | When `true` and the code is filled then the focus will be moved to the last input element when clicked |
+| <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute. |
 | <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored |
 
 #### Events

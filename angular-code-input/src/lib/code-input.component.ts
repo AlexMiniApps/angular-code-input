@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -22,7 +23,7 @@ enum InputState {
   templateUrl: 'code-input.component.html',
   styleUrls: ['./code-input.component.scss']
 })
-export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
+export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, AfterViewChecked {
 
   @ViewChildren('input') inputsList: QueryList<ElementRef>;
 
@@ -32,6 +33,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() readonly isPrevFocusableAfterClearing = true;
   @Input() readonly isFocusingOnLastByClickIfFilled = false;
   @Input() readonly inputType = 'tel';
+  @Input() readonly initialFocusField?: number;
   @Input() readonly code?: string | number;
 
   @Output() codeChanged = new EventEmitter<string>();
@@ -41,6 +43,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
 
   private inputs: HTMLInputElement[] = [];
   private inputsStates: InputState[] = [];
+  private state = {
+    isFocusingAfterAppearingCompleted: false,
+    isInitialFocusFieldEnabled: false
+  };
 
   constructor() {
   }
@@ -51,6 +57,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
 
   ngOnInit(): void {
     this.placeHolders = Array(this.codeLength).fill(1);
+    this.state.isInitialFocusFieldEnabled = !this.isEmpty(this.initialFocusField);
   }
 
   ngAfterViewInit(): void {
@@ -61,6 +68,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
 
     // the @Input code might have value. Checking
     this.onInputCodeChanges();
+  }
+
+  ngAfterViewChecked(): void {
+    this.focusOnInputAfterAppearing();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -222,6 +233,19 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges {
     this.inputs.forEach((input: HTMLInputElement, index: number) => {
       this.setInputValue(input, chars[index]);
     });
+  }
+
+  private focusOnInputAfterAppearing(): void {
+    if (!this.state.isInitialFocusFieldEnabled) {
+      return;
+    }
+
+    if (this.state.isFocusingAfterAppearingCompleted) {
+      return;
+    }
+
+    this.inputs[this.initialFocusField].focus();
+    this.state.isFocusingAfterAppearingCompleted = document.activeElement === this.inputs[this.initialFocusField];
   }
 
   private emitChanges(): void {

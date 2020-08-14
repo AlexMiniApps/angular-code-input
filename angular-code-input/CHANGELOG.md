@@ -1,3 +1,7 @@
+# 1.2.2 (04.08.2020)
+**Note:** Have added the prop initialFocusField for focusing on the appropriate input when 
+the component has been appeared.
+
 # 1.2.1 (20.06.2020)
 **Note:** Have added the prop isFocusingOnLastByClickIfFilled for focusing on the last input box 
 if the code is full, and any input box clicked. 
