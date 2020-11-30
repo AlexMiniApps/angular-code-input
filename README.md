@@ -4,7 +4,7 @@
 ![](https://img.shields.io/npm/v/angular-code-input)
 ![](https://img.shields.io/github/issues/AlexMiniApps/angular-code-input?color=%23aaa)
 
-Robust and <b>tested</b> code (number/chars) input component for Angular 7, 8, 9, 10 + projects.<br />
+Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 11+ projects.<br />
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
 <b>Clipboard</b> events are supported.
 
@@ -16,7 +16,7 @@ Preview
 
 ## Supported platforms
 
-<b>Angular</b> 7, 8, 9, 10 +<br />
+<b>Angular</b> 7, 8, 9, 10, 11 +<br />
 <b>Ionic</b> 4, 5 +<br />
 Mobile browsers and WebViews on: <b>Android</b> and <b>iOS</b><br />
 Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
@@ -41,12 +41,27 @@ import { CodeInputModule } from 'angular-code-input';
 })
 ```
 
+It is possible to configure the component across the app using the root config. In such case the import will look as follows:
+```ts
+import { CodeInputModule } from 'angular-code-input';
+
+@NgModule({
+  imports: [
+    // ...
+    CodeInputModule.forRoot({
+      codeLength: 6,
+      isCharsCode: true,
+      code: 'abcd'
+    }),
+  ]
+})
+```
+
 Include the component on page template HTML:
 
 ```html
-  <code-input [isCodeHidden]="false"
-              [isNonDigitsCode]="false"
-              [codeLength]="4"
+  <code-input [isCodeHidden]="true"
+              [codeLength]="5"
               (codeChanged)="onCodeChanged($event)"
               (codeCompleted)="onCodeCompleted($event)">
   </code-input>
@@ -117,11 +132,11 @@ Example with only bottom borders:
 | <b>`codeLength`</b> | number | 4 | Length of input code |
 | <b>`inputType`</b> | string | tel | Type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'` |
 | <b>`isCodeHidden`</b> | boolean | false | When `true` inputted code chars will be shown as asterisks (points) |
-| <b>`isNonDigitsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isNonDigitsCode` is `false` the value will be ignored |
+| <b>`isCharsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isCharsCode` is `false` the value will be ignored |
 | <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
 | <b>`isFocusingOnLastByClickIfFilled`</b> | boolean | false | When `true` and the code is filled then the focus will be moved to the last input element when clicked |
 | <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute. |
-| <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isNonDigitsCode` is `false` the value will be <b>ignored |
+| <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isCharsCode` is `false` the value will be <b>ignored |
 
 #### Events
 

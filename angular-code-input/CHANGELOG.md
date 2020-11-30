@@ -1,3 +1,9 @@
+# 1.3.0 (30.11.2020)
+**Note:** The following changes have been made:
+- Added the root config of the component
+- The prop `isCharsCode` has been added for using instead of the `isNonDigitsCode`
+- Added the ability to configure component at runtime
+
 # 1.2.2 (04.08.2020)
 **Note:** Have added the prop initialFocusField for focusing on the appropriate input when 
 the component has been appeared.

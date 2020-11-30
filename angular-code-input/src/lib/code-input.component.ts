@@ -4,14 +4,21 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   OnInit,
+  Optional,
   Output,
   QueryList,
   SimpleChanges,
   ViewChildren
 } from '@angular/core';
+import {
+  CodeInputComponentConfig,
+  CodeInputComponentConfigToken,
+  defaultComponentConfig
+} from './code-input.component.config';
 
 enum InputState {
   ready = 0,
@@ -23,23 +30,25 @@ enum InputState {
   templateUrl: 'code-input.component.html',
   styleUrls: ['./code-input.component.scss']
 })
-export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, AfterViewChecked {
+export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, AfterViewChecked, CodeInputComponentConfig {
 
   @ViewChildren('input') inputsList: QueryList<ElementRef>;
 
-  @Input() readonly codeLength = 4;
-  @Input() readonly isNonDigitsCode = false;
-  @Input() readonly isCodeHidden = false;
-  @Input() readonly isPrevFocusableAfterClearing = true;
-  @Input() readonly isFocusingOnLastByClickIfFilled = false;
-  @Input() readonly inputType = 'tel';
+  @Input() readonly codeLength;
+  @Input() readonly inputType;
   @Input() readonly initialFocusField?: number;
-  @Input() readonly code?: string | number;
+  /** @deprecated Use isCharsCode prop instead. */
+  @Input() isNonDigitsCode = false;
+  @Input() isCharsCode;
+  @Input() isCodeHidden;
+  @Input() isPrevFocusableAfterClearing;
+  @Input() isFocusingOnLastByClickIfFilled;
+  @Input() code?: string | number;
 
-  @Output() codeChanged = new EventEmitter<string>();
-  @Output() codeCompleted = new EventEmitter<string>();
+  @Output() readonly codeChanged = new EventEmitter<string>();
+  @Output() readonly codeCompleted = new EventEmitter<string>();
 
-  public placeHolders: number[];
+  public placeholders: number[];
 
   private inputs: HTMLInputElement[] = [];
   private inputsStates: InputState[] = [];
@@ -48,7 +57,25 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     isInitialFocusFieldEnabled: false
   };
 
-  constructor() {
+  constructor(@Optional() @Inject(CodeInputComponentConfigToken) config?: CodeInputComponentConfig) {
+    Object.assign(this, defaultComponentConfig);
+
+    if (!config) {
+      return;
+    }
+
+    // filtering for only valid config props
+    for (const prop in config) {
+      if (!config.hasOwnProperty(prop)) {
+        continue;
+      }
+
+      if (!defaultComponentConfig.hasOwnProperty(prop)) {
+        continue;
+      }
+
+      this[prop] = config[prop];
+    }
   }
 
   /**
@@ -56,7 +83,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
    */
 
   ngOnInit(): void {
-    this.placeHolders = Array(this.codeLength).fill(1);
+    this.placeholders = Array(this.codeLength).fill(1);
     this.state.isInitialFocusFieldEnabled = !this.isEmpty(this.initialFocusField);
   }
 
@@ -116,7 +143,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
       return;
     }
 
-    // only digits are allowed if isNonDigitsCode flag is absent/false
+    // only digits are allowed if isCharsCode flag is absent/false
     if (!this.canInputValue(value)) {
       e.preventDefault();
       e.stopPropagation();
@@ -310,7 +337,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
 
     const isDigitsValue = /^[0-9]+$/.test(value.toString());
-    return isDigitsValue || this.isNonDigitsCode;
+    return isDigitsValue || (this.isCharsCode || this.isNonDigitsCode);
   }
 
   private setStateForInput(input: HTMLInputElement, state: InputState): void {
