@@ -32,26 +32,29 @@ enum InputState {
 })
 export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, AfterViewChecked, CodeInputComponentConfig {
 
-  @ViewChildren('input') inputsList: QueryList<ElementRef>;
+  @ViewChildren('input') inputsList !: QueryList<ElementRef>;
 
-  @Input() readonly codeLength;
-  @Input() readonly inputType;
-  @Input() readonly initialFocusField?: number;
+  @Input() codeLength !: number;
+  @Input() inputType !: string;
+  @Input() initialFocusField?: number;
   /** @deprecated Use isCharsCode prop instead. */
   @Input() isNonDigitsCode = false;
-  @Input() isCharsCode;
-  @Input() isCodeHidden;
-  @Input() isPrevFocusableAfterClearing;
-  @Input() isFocusingOnLastByClickIfFilled;
-  @Input() code?: string | number;
+  @Input() isCharsCode !: boolean;
+  @Input() isCodeHidden !: boolean;
+  @Input() isPrevFocusableAfterClearing !: boolean;
+  @Input() isFocusingOnLastByClickIfFilled !: boolean;
+  @Input() code ?: string | number;
 
   @Output() readonly codeChanged = new EventEmitter<string>();
   @Output() readonly codeCompleted = new EventEmitter<string>();
 
-  public placeholders: number[];
+  public placeholders !: number[];
 
   private inputs: HTMLInputElement[] = [];
   private inputsStates: InputState[] = [];
+
+  // tslint:disable-next-line:variable-name
+  private _codeLength !: number;
   private state = {
     isFocusingAfterAppearingCompleted: false,
     isInitialFocusFieldEnabled: false
@@ -74,6 +77,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
         continue;
       }
 
+      // @ts-ignore
       this[prop] = config[prop];
     }
   }
@@ -83,7 +87,9 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
    */
 
   ngOnInit(): void {
-    this.placeholders = Array(this.codeLength).fill(1);
+    // defining internal code length prop for skipping external prop updates
+    this._codeLength = this.codeLength;
+    this.placeholders = Array(this._codeLength).fill(1);
     this.state.isInitialFocusFieldEnabled = !this.isEmpty(this.initialFocusField);
   }
 
@@ -118,14 +124,14 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
 
     const target = e.target;
-    const last = this.inputs[this.codeLength - 1];
+    const last = this.inputs[this._codeLength - 1];
     // already focused
     if (target === last) {
       return;
     }
 
     // check filling
-    const isFilled = this.getCurrentFilledCode().length >= this.codeLength;
+    const isFilled = this.getCurrentFilledCode().length >= this._codeLength;
     if (!isFilled) {
       return;
     }
@@ -155,7 +161,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     this.setInputValue(target, value.toString().charAt(0));
     this.emitChanges();
 
-    if (next > this.codeLength - 1) {
+    if (next > this._codeLength - 1) {
       target.blur();
       return;
     }
@@ -174,7 +180,8 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
 
     // Convert paste text into iterable
-    const values = data.split('');
+    // tslint:disable-next-line:no-non-null-assertion
+    const values = data!.split('');
     let valIndex = 0;
 
     for (let j = i; j < this.inputs.length; j++) {
@@ -228,15 +235,6 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
   }
 
-  isInputElementEmptyAt(index: number): boolean {
-    const input = this.inputs[index];
-    if (!input) {
-      return true;
-    }
-
-    return this.isEmpty(input.value);
-  }
-
   private onInputCodeChanges(): void {
     if (!this.inputs.length) {
       return;
@@ -249,16 +247,20 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
       return;
     }
 
-    const chars = this.code.toString().trim().split('');
+    // tslint:disable-next-line:no-non-null-assertion
+    const chars = this.code!.toString().trim().split('');
     // checking if all the values are correct
+    let isAllCharsAreAllowed = true;
     for (const char of chars) {
       if (!this.canInputValue(char)) {
-        return;
+        isAllCharsAreAllowed = false;
+        break;
       }
     }
 
     this.inputs.forEach((input: HTMLInputElement, index: number) => {
-      this.setInputValue(input, chars[index]);
+      const value = isAllCharsAreAllowed ? chars[index] : null;
+      this.setInputValue(input, value);
     });
   }
 
@@ -268,6 +270,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
 
     if (this.state.isFocusingAfterAppearingCompleted) {
+      return;
+    }
+
+    if (!this.initialFocusField) {
       return;
     }
 
@@ -284,7 +290,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
 
     this.codeChanged.emit(code);
 
-    if (code.length >= this.codeLength) {
+    if (code.length >= this._codeLength) {
       this.codeCompleted.emit(code);
     }
   }
@@ -327,8 +333,20 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
 
   private setInputValue(input: HTMLInputElement, value: any): void {
     const isEmpty = this.isEmpty(value);
-    input.value = isEmpty ? null : value;
-    input.className = isEmpty ? '' : 'has-value';
+    const valueClassCSS = 'has-value';
+    const emptyClassCSS = 'empty';
+    if (isEmpty) {
+      input.value = '';
+      input.classList.remove(valueClassCSS);
+      // tslint:disable-next-line:no-non-null-assertion
+      input.parentElement!.classList.add(emptyClassCSS);
+    }
+    else {
+      input.value = value;
+      input.classList.add(valueClassCSS);
+      // tslint:disable-next-line:no-non-null-assertion
+      input.parentElement!.classList.remove(emptyClassCSS);
+    }
   }
 
   private canInputValue(value: any): boolean {

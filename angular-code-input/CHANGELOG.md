@@ -1,3 +1,9 @@
+# 1.3.1 (01.12.2020)
+**Note:** The following changes have been made:
+- The issue with inline component configuration has been resolved
+- Have fixed issues with readonly properties in Angular 11
+- Adjusting tslint issues
+
 # 1.3.0 (30.11.2020)
 **Note:** The following changes have been made:
 - Added the root config of the component
