@@ -8,7 +8,7 @@ Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 11+
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
 <b>Clipboard</b> events are supported.
 
-Inspire us with your stars <img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/> to build the best component!
+<img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/> Star it to inspire us to build the best component!
 
 Preview
 
