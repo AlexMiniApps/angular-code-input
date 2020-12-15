@@ -1,7 +1,7 @@
 # 1.3.2 (15.12.2020)
 **Note:** Have implemented the feature: 
 
-Trim whitespace before paste in digit code input ![#23](https://github.com/AlexMiniApps/angular-code-input/issues/23)
+Trim whitespace before paste in digit code input [#23](https://github.com/AlexMiniApps/angular-code-input/issues/23)
 
 # 1.3.1 (01.12.2020)
 **Note:** The following changes have been made:
