@@ -173,7 +173,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     e.preventDefault();
     e.stopPropagation();
 
-    const data = e.clipboardData ? e.clipboardData.getData('text') : undefined;
+    const data = e.clipboardData ? e.clipboardData.getData('text').trim() : undefined;
 
     if (this.isEmpty(data)) {
       return;
