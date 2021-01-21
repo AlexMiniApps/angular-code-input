@@ -26,6 +26,7 @@ enum InputState {
 }
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'code-input',
   templateUrl: 'code-input.component.html',
   styleUrls: ['./code-input.component.scss']
@@ -141,7 +142,6 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
   }
 
   onInput(e: any, i: number): void {
-    const next = i + 1;
     const target = e.target;
     const value = e.data || target.value;
 
@@ -158,9 +158,18 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
       return;
     }
 
-    this.setInputValue(target, value.toString().charAt(0));
+    const values = value.toString().trim().split('');
+    for (let j = 0; j < values.length; j++) {
+      const index = j + i;
+      if (index > this._codeLength - 1) {
+        break;
+      }
+
+      this.setInputValue(this.inputs[index], values[j]);
+    }
     this.emitChanges();
 
+    const next = i + values.length;
     if (next > this._codeLength - 1) {
       target.blur();
       return;
