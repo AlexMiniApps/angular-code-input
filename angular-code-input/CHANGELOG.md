@@ -1,3 +1,8 @@
+# 1.3.3 (21.01.2021)
+**Note:** Have implemented the feature: 
+
+Insert Code from Messages not working on IOS [#19](https://github.com/AlexMiniApps/angular-code-input/issues/19)
+
 # 1.3.2 (15.12.2020)
 **Note:** Have implemented the feature: 
 
