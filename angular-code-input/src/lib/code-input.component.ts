@@ -282,12 +282,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
       return;
     }
 
-    if (!this.initialFocusField) {
-      return;
-    }
-
-    this.inputs[this.initialFocusField].focus();
-    this.state.isFocusingAfterAppearingCompleted = document.activeElement === this.inputs[this.initialFocusField];
+    // tslint:disable-next-line:no-non-null-assertion
+    this.inputs[this.initialFocusField!].focus();
+    // tslint:disable-next-line:no-non-null-assertion
+    this.state.isFocusingAfterAppearingCompleted = document.activeElement === this.inputs[this.initialFocusField!];
   }
 
   private emitChanges(): void {
