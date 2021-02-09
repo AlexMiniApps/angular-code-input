@@ -137,8 +137,8 @@ Example with only bottom borders:
 | <b>`isCharsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isCharsCode` is `false` the value will be ignored |
 | <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
 | <b>`isFocusingOnLastByClickIfFilled`</b> | boolean | false | When `true` and the code is filled then the focus will be moved to the last input element when clicked |
-| <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute. |
-| <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isCharsCode` is `false` the value will be <b>ignored |
+| <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute |
+| <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isCharsCode` is `false` the value will be <b>ignored</b> |
 
 #### Events
 
@@ -146,3 +146,39 @@ Example with only bottom borders:
 |----------|--------------------|
 | `codeChanged` | Will be called every time when a user changed the code |
 | `codeCompleted` | Will be called only if a user entered full code |
+
+## Methods
+
+For calling the component's methods it is required to access the component inside the template or page script.
+It can be reached as follows.
+
+Inside the page template HTML add a template ref:
+
+```html
+  <code-input 
+    ...
+    #codeInput
+    ...
+  >
+  </code-input>
+```
+
+Inside a page script attach the component:
+
+```ts
+...
+// adding to the imports
+import {CodeInputComponent} from 'angular-code-input';
+...
+// adding to the page props
+@ViewChild('codeInput') codeInput !: CodeInputComponent;
+...
+// calling the component's methods somewhere in the page.
+// IMPORTANT: it will be accessible only after the view initialization!
+this.codeInput.reset();
+```
+
+| Method         | Description        |          
+|----------------|--------------------|
+| <b>`focusOnField(index: number): void`</b> | Focuses the input caret on the input box with the passed index |
+| <b>`reset(isChangesEmitting = false): void`</b> | <p>Resets the component values in the following way:</p><p>if the `code` option is supplied then the value will be reset to the `code` option value. If the `code` option is not supplied then the component will be reset to empty values.</p><p>if the `initialFocusField` option is supplied then the caret will be focused in that filed after reset.</p><p>if the `isChangesEmitting` param is passed then changes will be emitted</p>|

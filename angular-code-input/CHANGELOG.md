@@ -1,3 +1,9 @@
+# 1.4.0 (09.02.2021)
+**Note:** The following changes have been made:
+- Have fixed the issue 'initialFocusField not working for 0 as index bug' [#26](https://github.com/AlexMiniApps/angular-code-input/issues/26)
+- Have implemented the feature 'Clear the inputs?' [#27](https://github.com/AlexMiniApps/angular-code-input/issues/27)
+- Have added the method for an input field focusing 
+
 # 1.3.3 (21.01.2021)
 **Note:** Have implemented the feature: 
 
