@@ -118,6 +118,28 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
    * Methods
    */
 
+  reset(isChangesEmitting = false): void {
+    // resetting the code to its initial value or to an empty value
+    this.onInputCodeChanges();
+
+    if (this.state.isInitialFocusFieldEnabled) {
+      // tslint:disable-next-line:no-non-null-assertion
+      this.focusOnField(this.initialFocusField!);
+    }
+
+    if (isChangesEmitting) {
+      this.emitChanges();
+    }
+  }
+
+  focusOnField(index: number): void {
+    if (index >= this._codeLength) {
+      throw new Error('The index of the focusing input box should be less than the codeLength.');
+    }
+
+    this.inputs[index].focus();
+  }
+
   onClick(e: any): void {
     // handle click events only if the the prop is enabled
     if (!this.isFocusingOnLastByClickIfFilled) {
@@ -283,7 +305,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
     }
 
     // tslint:disable-next-line:no-non-null-assertion
-    this.inputs[this.initialFocusField!].focus();
+    this.focusOnField(this.initialFocusField!);
     // tslint:disable-next-line:no-non-null-assertion
     this.state.isFocusingAfterAppearingCompleted = document.activeElement === this.inputs[this.initialFocusField!];
   }
