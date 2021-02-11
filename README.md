@@ -1,8 +1,9 @@
 # Code/pincode input component for angular 
 
-![](https://img.shields.io/npm/dm/angular-code-input)
-![](https://img.shields.io/npm/v/angular-code-input)
-![](https://img.shields.io/github/issues/AlexMiniApps/angular-code-input?color=%23aaa)
+![](https://img.shields.io/npm/dm/angular-code-input?color=55aa33)
+![](https://img.shields.io/github/stars/AlexMiniApps/angular-code-input)
+![](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=99aabb)
+![](https://img.shields.io/github/license/AlexMiniApps/angular-code-input?color=00ccbb)
 
 Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 11+ projects.<br />
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
