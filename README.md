@@ -54,7 +54,7 @@ import { CodeInputModule } from 'angular-code-input';
     CodeInputModule.forRoot({
       codeLength: 6,
       isCharsCode: true,
-      code: 'abcd'
+      code: 'abcdef'
     }),
   ]
 })
