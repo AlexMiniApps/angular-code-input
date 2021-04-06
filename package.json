@@ -27,7 +27,7 @@
     "@angular/platform-browser": "~11.2.8",
     "@angular/platform-browser-dynamic": "~11.2.8",
     "@angular/router": "~11.2.8",
-    "rxjs": "~6.6.2",
+    "rxjs": "~6.6.7",
     "tsickle": "^0.39.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
