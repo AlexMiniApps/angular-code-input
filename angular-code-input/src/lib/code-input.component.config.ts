@@ -11,6 +11,7 @@ export interface CodeInputComponentConfig {
   isPrevFocusableAfterClearing?: boolean;
   isFocusingOnLastByClickIfFilled?: boolean;
   code?: string | number;
+  disabled?: boolean;
 }
 
 export const defaultComponentConfig: CodeInputComponentConfig = {
@@ -21,5 +22,6 @@ export const defaultComponentConfig: CodeInputComponentConfig = {
   isCodeHidden: false,
   isPrevFocusableAfterClearing: true,
   isFocusingOnLastByClickIfFilled: false,
-  code: undefined
+  code: undefined,
+  disabled: false
 };
