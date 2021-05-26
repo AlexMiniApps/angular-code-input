@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CodeInputComponent } from './code-input.component';
 
@@ -6,7 +6,7 @@ describe('CodeInputComponent', () => {
   let component: CodeInputComponent;
   let fixture: ComponentFixture<CodeInputComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CodeInputComponent ]
     }).compileComponents();
