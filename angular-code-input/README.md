@@ -5,11 +5,11 @@
 ![](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=99aabb)
 ![](https://img.shields.io/github/license/AlexMiniApps/angular-code-input?color=00ccbb)
 
-Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 11+ projects.<br />
+Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 12+ projects.<br />
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
 <b>Clipboard</b> events are supported.
 
-<img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/> Star it to inspire us to build the best component!
+<img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/> Star it to inspire us to build the best component! <img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/>
 
 Preview
 
@@ -19,7 +19,7 @@ Preview
 
 ## Supported platforms
 
-<b>Angular</b> 7, 8, 9, 10, 11 +<br />
+<b>Angular</b> 7, 8, 9, 10, 11, 12 +<br />
 <b>Ionic</b> 4, 5 +<br />
 Mobile browsers and WebViews on: <b>Android</b> and <b>iOS</b><br />
 Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
@@ -140,6 +140,7 @@ Example with only bottom borders:
 | <b>`isFocusingOnLastByClickIfFilled`</b> | boolean | false | When `true` and the code is filled then the focus will be moved to the last input element when clicked |
 | <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute |
 | <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isCharsCode` is `false` the value will be <b>ignored</b> |
+| <b>`disabled`</b> | boolean | false | When `true` then the component will not handle user actions, like in regular html input element with the `disabled` attribute  |
 
 #### Events
 

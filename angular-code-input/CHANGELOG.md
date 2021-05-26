@@ -1,3 +1,8 @@
+# 1.5.0 (09.02.2021)
+**Note:** The following changes have been made:
+- Have implemented the feature 'Disabled state' [#28](https://github.com/AlexMiniApps/angular-code-input/issues/28)
+- Have fixed the issue 'Insert code "from messages" doesn't appear on iOS' [#36](https://github.com/AlexMiniApps/angular-code-input/issues/36)
+
 # 1.4.0 (09.02.2021)
 **Note:** The following changes have been made:
 - Have fixed the issue 'initialFocusField not working for 0 as index bug' [#26](https://github.com/AlexMiniApps/angular-code-input/issues/26)
