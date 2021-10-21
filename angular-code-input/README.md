@@ -141,6 +141,7 @@ Example with only bottom borders:
 | <b>`initialFocusField`</b> | number | - | The index of the input box for initial focusing. When the component will appear the focus will be placed on the input with this index. <br/> Note: If you need to dynamically hide the component it is needed to use <b>*ngIf</b> directive instead of the `[hidden]` attribute |
 | <b>`code`</b> | string / number | - | The input code value for the component. If the parameter contains non digits chars and `isCharsCode` is `false` the value will be <b>ignored</b> |
 | <b>`disabled`</b> | boolean | false | When `true` then the component will not handle user actions, like in regular html input element with the `disabled` attribute  |
+| <b>`autocapitalize`</b> | string | - | The autocapitalize attribute is an enumerated attribute that controls whether and how text input is automatically capitalized as it is entered/edited by the user  |
 
 #### Events
 

@@ -46,6 +46,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
   @Input() isFocusingOnLastByClickIfFilled !: boolean;
   @Input() code ?: string | number;
   @Input() disabled !: boolean;
+  @Input() autocapitalize ?: string;
 
   @Output() readonly codeChanged = new EventEmitter<string>();
   @Output() readonly codeCompleted = new EventEmitter<string>();

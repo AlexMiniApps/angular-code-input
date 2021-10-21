@@ -12,6 +12,7 @@ export interface CodeInputComponentConfig {
   isFocusingOnLastByClickIfFilled?: boolean;
   code?: string | number;
   disabled?: boolean;
+  autocapitalize?: string;
 }
 
 export const defaultComponentConfig: CodeInputComponentConfig = {
@@ -23,5 +24,6 @@ export const defaultComponentConfig: CodeInputComponentConfig = {
   isPrevFocusableAfterClearing: true,
   isFocusingOnLastByClickIfFilled: false,
   code: undefined,
-  disabled: false
+  disabled: false,
+  autocapitalize: undefined
 };
