@@ -7,6 +7,7 @@ import {
   Inject,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -19,6 +20,7 @@ import {
   CodeInputComponentConfigToken,
   defaultComponentConfig
 } from './code-input.component.config';
+import { Subscription } from 'rxjs';
 
 enum InputState {
   ready = 0,
@@ -31,7 +33,7 @@ enum InputState {
   templateUrl: 'code-input.component.html',
   styleUrls: ['./code-input.component.scss']
 })
-export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, AfterViewChecked, CodeInputComponentConfig {
+export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnDestroy, AfterViewChecked, CodeInputComponentConfig {
 
   @ViewChildren('input') inputsList !: QueryList<ElementRef>;
 
@@ -51,10 +53,11 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
   @Output() readonly codeChanged = new EventEmitter<string>();
   @Output() readonly codeCompleted = new EventEmitter<string>();
 
-  public placeholders !: number[];
+  public placeholders: number[] = [];
 
   private inputs: HTMLInputElement[] = [];
   private inputsStates: InputState[] = [];
+  private inputsListSubscription !: Subscription;
 
   // tslint:disable-next-line:variable-name
   private _codeLength !: number;
@@ -90,20 +93,16 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
    */
 
   ngOnInit(): void {
-    // defining internal code length prop for skipping external prop updates
-    this._codeLength = this.codeLength;
-    this.placeholders = Array(this._codeLength).fill(1);
+    // defining the state
     this.state.isInitialFocusFieldEnabled = !this.isEmpty(this.initialFocusField);
+    // initiating the code
+    this.onCodeLengthChanges();
   }
 
   ngAfterViewInit(): void {
-    this.inputsList.forEach((item) => {
-      this.inputs.push(item.nativeElement);
-      this.inputsStates.push(InputState.ready);
-    });
-
-    // the @Input code might have value. Checking
-    this.onInputCodeChanges();
+    // initiation of the inputs
+    this.inputsListSubscription = this.inputsList.changes.subscribe(this.onInputsListChanges.bind(this));
+    this.onInputsListChanges(this.inputsList);
   }
 
   ngAfterViewChecked(): void {
@@ -113,6 +112,15 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.code) {
       this.onInputCodeChanges();
+    }
+    if (changes.codeLength) {
+      this.onCodeLengthChanges();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.inputsListSubscription) {
+      this.inputsListSubscription.unsubscribe();
     }
   }
 
@@ -295,6 +303,37 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, Aft
       const value = isAllCharsAreAllowed ? chars[index] : null;
       this.setInputValue(input, value);
     });
+  }
+
+  private onCodeLengthChanges(): void {
+    if (!this.codeLength) {
+      return;
+    }
+
+    this._codeLength = this.codeLength;
+    if (this._codeLength > this.placeholders.length) {
+      const numbers = Array(this._codeLength - this.placeholders.length).fill(1);
+      this.placeholders.splice(this.placeholders.length - 1, 0, ...numbers);
+    }
+    else if (this._codeLength < this.placeholders.length) {
+      this.placeholders.splice(this._codeLength);
+    }
+  }
+
+  private onInputsListChanges(list: QueryList<ElementRef>): void {
+    if (list.length > this.inputs.length) {
+      const inputsToAdd = list.filter((item, index) => index > this.inputs.length - 1);
+      this.inputs.splice(this.inputs.length, 0, ...inputsToAdd.map(item => item.nativeElement));
+      const states = Array(inputsToAdd.length).fill(InputState.ready);
+      this.inputsStates.splice(this.inputsStates.length, 0, ...states);
+    }
+    else if (list.length < this.inputs.length) {
+      this.inputs.splice(list.length);
+      this.inputsStates.splice(list.length);
+    }
+
+    // filling the inputs after changing of their count
+    this.onInputCodeChanges();
   }
 
   private focusOnInputAfterAppearing(): void {
