@@ -254,9 +254,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
     const isTargetEmpty = this.isEmpty(target.value);
     const prev = i - 1;
 
-    // processing only backspace events
+    // processing only the backspace and delete key events
     const isBackspaceKey = await this.isBackspaceKey(e);
-    if (!isBackspaceKey) {
+    const isDeleteKey = this.isDeleteKey(e);
+    if (!isBackspaceKey && !isDeleteKey) {
       return;
     }
 
@@ -267,7 +268,8 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
       this.emitChanges();
     }
 
-    if (prev < 0) {
+    // preventing to focusing on the previous field if it does not exist or the delete key has been pressed
+    if (prev < 0 || isDeleteKey) {
       return;
     }
 
@@ -399,6 +401,10 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
         resolve(input.selectionStart === 0 && !isReset);
       });
     });
+  }
+
+  private isDeleteKey(e: any): boolean {
+    return (e.key && e.key.toLowerCase() === 'delete') || (e.keyCode && e.keyCode === 46);
   }
 
   private setInputValue(input: HTMLInputElement, value: any): void {
