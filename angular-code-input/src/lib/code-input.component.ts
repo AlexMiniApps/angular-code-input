@@ -39,6 +39,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
 
   @Input() codeLength !: number;
   @Input() inputType !: string;
+  @Input() inputMode !: string;
   @Input() initialFocusField?: number;
   /** @deprecated Use isCharsCode prop instead. */
   @Input() isNonDigitsCode = false;

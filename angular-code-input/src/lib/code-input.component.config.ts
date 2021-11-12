@@ -5,6 +5,7 @@ export const CodeInputComponentConfigToken = new InjectionToken<CodeInputCompone
 export interface CodeInputComponentConfig {
   codeLength?: number;
   inputType?: string;
+  inputMode?: string;
   initialFocusField?: number;
   isCharsCode?: boolean;
   isCodeHidden?: boolean;
@@ -18,6 +19,7 @@ export interface CodeInputComponentConfig {
 export const defaultComponentConfig: CodeInputComponentConfig = {
   codeLength: 4,
   inputType: 'tel',
+  inputMode: 'numeric',
   initialFocusField: undefined,
   isCharsCode: false,
   isCodeHidden: false,
