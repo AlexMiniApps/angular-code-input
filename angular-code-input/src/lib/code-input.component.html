@@ -6,8 +6,8 @@
          (input)="onInput($event, i)"
          (keydown)="onKeydown($event, i)"
          [type]="inputType"
-         [inputmode]="inputMode"
          [disabled]="disabled"
+         [attr.inputmode]="inputMode"
          [attr.autocapitalize]="autocapitalize"
          autocomplete="one-time-code"/>
 </span>
