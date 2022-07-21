@@ -11,6 +11,7 @@
   --item-shadow-focused: 0px 1px 5px rgba(221, 221, 221, 1);
   --item-border-radius: 5px;
   --item-background: transparent;
+  --item-font-weight: 300;
   --color: #171516;
 
   display: flex;
@@ -41,6 +42,7 @@
     background: var(--item-background);
     text-align: center;
     font-size: inherit;
+    font-weight: var(--item-font-weight);
     border: var(--item-border);
     border-bottom: var(--item-border-bottom);
     border-radius: var(--item-border-radius);
