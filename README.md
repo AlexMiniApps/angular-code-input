@@ -5,7 +5,7 @@
 ![](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=99aabb)
 ![](https://img.shields.io/github/license/AlexMiniApps/angular-code-input?color=00ccbb)
 
-Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 12+ projects.<br />
+Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 12, 14+ projects.<br />
 Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
 <b>Clipboard</b> events are supported.
 
@@ -19,7 +19,7 @@ Preview
 
 ## Supported platforms
 
-<b>Angular</b> 7, 8, 9, 10, 11, 12 +<br />
+<b>Angular</b> 7, 8, 9, 10, 11, 12, 14 +<br />
 <b>Ionic</b> 4, 5 +<br />
 Mobile browsers and WebViews on: <b>Android</b> and <b>iOS</b><br />
 Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
