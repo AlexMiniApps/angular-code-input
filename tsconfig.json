@@ -26,5 +26,8 @@
         "dist/code-input/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "compilationMode": "partial"
   }
 }
