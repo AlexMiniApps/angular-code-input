@@ -1,4 +1,4 @@
-# Code/pincode input component for angular 
+# Code/pincode input component for angular
 
 ![](https://img.shields.io/npm/dm/angular-code-input?color=55aa33)
 ![](https://img.shields.io/github/stars/AlexMiniApps/angular-code-input)
@@ -86,27 +86,28 @@ Inside a page script:
 
 #### View
 
-It is possible to configure the component via CSS vars 
+It is possible to configure the component via CSS vars
 <br />or using `::ng-deep` (deprecated) angular CSS selector
 [::ng-deep](https://angular.io/guide/component-styles#deprecated-deep--and-ng-deep)
 
 CSS vars:
 
-| CSS Var  | Description        |          
-|----------|--------------------|
-| `--text-security-type: disc;` | Text presentation type when the isCodeHidden is enabled |
-| `--item-spacing: 4px;` | Horizontal space between input items |
-| `--item-height: 4.375em;` | Height of input items |
-| `--item-border: 1px solid #dddddd;` | Border of input item for an empty value |
-| `--item-border-bottom: 1px solid #dddddd;` | Bottom border of input item for an empty value |
-| `--item-border-has-value: 1px solid #dddddd;` | Border of input item with a value |
-| `--item-border-bottom-has-value: 1px solid #dddddd;` | Bottom border of input item with a value |
-| `--item-border-focused: 1px solid #dddddd;` | Border of input item when focused |
-| `--item-border-bottom-focused: 1px solid #dddddd;` | Bottom border of input item when focused |
-| `--item-shadow-focused: 0px 1px 5px rgba(221, 221, 221, 1);` | Shadow of input item when focused |
-| `--item-border-radius: 5px;` | Border radius of input item |
-| `--item-background: transparent;` | Input item background |
-| `--color: #171516;` | Text color of input items |
+| CSS Var                                                      | Description                                            |          
+|--------------------------------------------------------------|--------------------------------------------------------|
+| `--text-security-type: disc;`                                | Text presentation type when the isCodeHidden is enabled |
+| `--item-spacing: 4px;`                                       | Horizontal space between input items                   |
+| `--item-height: 4.375em;`                                    | Height of input items                                  |
+| `--item-border: 1px solid #dddddd;`                          | Border of input item for an empty value                |
+| `--item-border-bottom: 1px solid #dddddd;`                   | Bottom border of input item for an empty value         |
+| `--item-border-has-value: 1px solid #dddddd;`                | Border of input item with a value                      |
+| `--item-border-bottom-has-value: 1px solid #dddddd;`         | Bottom border of input item with a value               |
+| `--item-border-focused: 1px solid #dddddd;`                  | Border of input item when focused                      |
+| `--item-border-bottom-focused: 1px solid #dddddd;`           | Bottom border of input item when focused               |
+| `--item-shadow-focused: 0px 1px 5px rgba(221, 221, 221, 1);` | Shadow of input item when focused                      |
+| `--item-border-radius: 5px;`                                 | Border radius of input item                            |
+| `--item-background: transparent;`                            | Input item background                                  |
+| `--item-font-weight: 300;`                                   | Font weight of input item                              |
+| `--color: #171516;`                                          | Text color of input items                              |
 
 Example with only bottom borders:
 
@@ -158,12 +159,12 @@ It can be reached as follows.
 Inside the page template HTML add a template ref:
 
 ```html
-  <code-input 
-    ...
-    #codeInput
-    ...
-  >
-  </code-input>
+<code-input
+  ...
+  #codeInput
+  ...
+>
+</code-input>
 ```
 
 Inside a page script attach the component:
