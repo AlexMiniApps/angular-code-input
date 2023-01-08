@@ -39,5 +39,8 @@
       }
     }
   },
-  "defaultProject": "angular-code-input"
+  "defaultProject": "angular-code-input",
+  "cli": {
+    "analytics": false
+  }
 }
