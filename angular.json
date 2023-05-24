@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "angular-code-input/tsconfig.lib.json",
             "project": "angular-code-input/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "angular-code-input/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
