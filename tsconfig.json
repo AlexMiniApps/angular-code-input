@@ -11,24 +11,15 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "code-input": [
-        "dist/code-input"
-      ],
-      "code-input/*": [
-        "dist/code-input/*"
-      ]
+      "code-input": ["dist/code-input"],
+      "code-input/*": ["dist/code-input/*"]
     },
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial"
+    "strictTemplates": true
   }
 }
