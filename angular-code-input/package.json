@@ -1,8 +1,18 @@
 {
   "name": "angular-code-input",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Code or pin code input for Angular 7 - 12, 14 + / Ionic 4, 5 + projects",
-  "keywords": ["angular", "pincode", "angular-pincode",  "otp", "code-input", "angular-otp", "ionic-otp", "ionic-code-input", "ionic-pincode"],
+  "keywords": [
+    "angular",
+    "pincode",
+    "angular-pincode",
+    "otp",
+    "code-input",
+    "angular-otp",
+    "ionic-otp",
+    "ionic-code-input",
+    "ionic-pincode"
+  ],
   "author": "Alexander Dmitrenko",
   "license": "MIT",
   "repository": {

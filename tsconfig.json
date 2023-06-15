@@ -10,24 +10,16 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "target": "ES2022",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "code-input": [
-        "dist/code-input"
-      ],
-      "code-input/*": [
-        "dist/code-input/*"
-      ]
-    }
+      "code-input": ["dist/code-input"],
+      "code-input/*": ["dist/code-input/*"]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "compilationMode": "partial"
+    "strictTemplates": true
   }
 }
