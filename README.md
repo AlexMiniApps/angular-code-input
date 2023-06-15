@@ -5,11 +5,11 @@
 ![](https://badgen.net/badge/icon/typescript?icon=typescript&label&color=99aabb)
 ![](https://img.shields.io/github/license/AlexMiniApps/angular-code-input?color=00ccbb)
 
-Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 12, 14+ projects.<br />
-Ionic 4, 5 + is supported, can be used in iOS and Android.<br />
+Robust and <b>tested</b> code (number/chars) input component for Angular 7 - 16+ projects.<br />
+Ionic 4 - 7+ is supported, can be used in iOS and Android.<br />
 <b>Clipboard</b> events are supported.
 
-<img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/> Star it to inspire us to build the best component! <img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/>
+Star it to inspire us to build the best component! <img src="https://github.com/AlexMiniApps/angular-code-input/blob/master/star.jpg" alt="Star"/>
 
 Preview
 
@@ -19,8 +19,8 @@ Preview
 
 ## Supported platforms
 
-<b>Angular</b> 7, 8, 9, 10, 11, 12, 14 +<br />
-<b>Ionic</b> 4, 5 +<br />
+<b>Angular</b> 7 - 16+<br />
+<b>Ionic</b> 4 - 7+<br />
 Mobile browsers and WebViews on: <b>Android</b> and <b>iOS</b><br />
 Desktop browsers: <b>Chrome, Firefox, Safari, Edge v.79 +</b><br />
 Other browsers:  <b>Edge v.41 - 44</b> (without code hidden feature)
@@ -28,6 +28,13 @@ Other browsers:  <b>Edge v.41 - 44</b> (without code hidden feature)
 ## Installation
 
     $ npm install --save angular-code-input
+
+Choose the version corresponding to your Angular version:
+
+| Angular    | angular-code-input |
+|------------|--------------------|
+| 16+        | 2.x+               |
+| 7-15       | 1.x+               |
 
 ## Usage
 
@@ -67,7 +74,7 @@ Include the component on page template HTML:
               [codeLength]="5"
               (codeChanged)="onCodeChanged($event)"
               (codeCompleted)="onCodeCompleted($event)">
-</code-input>
+  </code-input>
 ```
 
 Inside a page script:

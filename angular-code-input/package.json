@@ -1,7 +1,7 @@
 {
   "name": "angular-code-input",
-  "version": "1.7.0",
-  "description": "Code or pin code input for Angular 7 - 12, 14 + / Ionic 4, 5 + projects",
+  "version": "2.0.0",
+  "description": "Code or pin code input for Angular 7 - 16+ / Ionic 4 - 7+ projects",
   "keywords": [
     "angular",
     "pincode",
@@ -23,7 +23,7 @@
     "url": "https://github.com/AlexMiniApps/angular-code-input/issues"
   },
   "peerDependencies": {
-    "@angular/common": ">=7.2.0",
-    "@angular/core": ">=7.2.0"
+    "@angular/common": ">=16.0.0",
+    "@angular/core": ">=16.0.0"
   }
 }

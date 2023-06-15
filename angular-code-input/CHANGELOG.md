@@ -1,3 +1,11 @@
+# 2.0.0 (15.06.2023)
+**Breaking changes**:
+- Enabled Ivy in the compiled library
+- The minimum supported version of Angular is set to **16**
+
+**Note:** Resolved the issue:
+- Add support for angular 13 [#59](https://github.com/AlexMiniApps/angular-code-input/issues/59)
+
 # 1.6.0 (11.11.2021)
 **Note:** Fixed issues and implemented cool features:
 - Always uppercase keyboard [#51](https://github.com/AlexMiniApps/angular-code-input/issues/51)
