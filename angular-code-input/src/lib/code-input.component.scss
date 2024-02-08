@@ -57,6 +57,7 @@
     }
 
     &:focus {
+      background: var(--item-background-focused, transparent);
       border: var(--item-border-focused);
       border-bottom: var(--item-border-bottom-focused);
       box-shadow: var(--item-shadow-focused);
