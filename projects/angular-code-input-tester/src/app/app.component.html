@@ -1,0 +1,13 @@
+<h1>Test Angular code input</h1>
+
+<!-- @TODO: add toggle -->
+
+<code-input
+  [codeLength]="5"
+  (codeChanged)="onCodeChanged($event)"
+  (codeCompleted)="onCodeCompleted($event)"
+>
+</code-input>
+
+<p>codeChange: {{ codeChanged }}</p>
+<p>codeCompleted: {{ codeCompleted }}</p>
