@@ -4,41 +4,147 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-code-input": {
-      "root": "angular-code-input",
-      "sourceRoot": "angular-code-input/src",
+      "root": "projects/angular-code-input",
+      "sourceRoot": "projects/angular-code-input/src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "angular-code-input/tsconfig.lib.json",
-            "project": "angular-code-input/ng-package.json"
+            "tsConfig": "projects/angular-code-input/tsconfig.lib.json",
+            "project": "projects/angular-code-input/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "angular-code-input/tsconfig.lib.prod.json"
+              "tsConfig": "projects/angular-code-input/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "angular-code-input/src/test.ts",
-            "tsConfig": "angular-code-input/tsconfig.spec.json",
-            "karmaConfig": "angular-code-input/karma.conf.js"
+            "main": "projects/angular-code-input/src/test.ts",
+            "tsConfig": "projects/angular-code-input/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-code-input/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "angular-code-input/tsconfig.lib.json",
-              "angular-code-input/tsconfig.spec.json"
+              "projects/angular-code-input/tsconfig.lib.json",
+              "projects/angular-code-input/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        }
+      }
+    },
+    "angular-code-input-tester": {
+      "root": "projects/angular-code-input-tester/",
+      "sourceRoot": "projects/angular-code-input-tester/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "aot": true,
+            "outputPath": "dist/angular-code-input-tester",
+            "index": "projects/angular-code-input-tester/src/index.html",
+            "main": "projects/angular-code-input-tester/src/main.ts",
+            "tsConfig": "projects/angular-code-input-tester/tsconfig.app.json",
+            "assets": [
+              "projects/angular-code-input-tester/src/favicon.ico",
+              "projects/angular-code-input-tester/src/assets"
+            ],
+            "styles": [
+              "projects/angular-code-input-tester/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/angular-code-input-tester/src/environments/environment.ts",
+                  "with": "projects/angular-code-input-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "angular-code-input-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "angular-code-input-tester:build:production"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/angular-code-input-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/angular-code-input-tester/karma.conf.js",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "assets": [
+              "projects/angular-code-input-tester/src/favicon.ico",
+              "projects/angular-code-input-tester/src/assets"
+            ],
+            "styles": [
+              "projects/angular-code-input-tester/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/angular-code-input-tester//**/*.ts",
+              "projects/angular-code-input-tester//**/*.html"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/angular-code-input-tester/e2e/protractor.conf.js",
+            "devServerTarget": "angular-code-input-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular-code-input-tester:serve:production"
+            }
           }
         }
       }
