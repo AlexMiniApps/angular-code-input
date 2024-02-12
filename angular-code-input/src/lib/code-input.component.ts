@@ -250,7 +250,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
     this.emitChanges();
   }
 
-  async onKeydown(e: any, i: number): Promise<void> {
+  async onKeyup(e: any, i: number): Promise<void> {
     const target = e.target;
     const isTargetEmpty = this.isEmpty(target.value);
     const prev = i - 1;
