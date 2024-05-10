@@ -142,6 +142,7 @@ Example with only bottom borders:
 |----------|:-------:|:-----:|----------|
 | <b>`codeLength`</b> | number | 4 | Length of input code |
 | <b>`inputType`</b> | string | tel | Type of the input DOM elements like `<input [type]="inputType"/>` default '`tel'` |
+| <b>`inputMode`</b> | string | numeric | inputmode of the input DOM elements like `<input [attr.inputmode]="inputMode"/>` default '`numeric'` |
 | <b>`isCodeHidden`</b> | boolean | false | When `true` inputted code chars will be shown as asterisks (points) |
 | <b>`isCharsCode`</b> | boolean | false | When `true` inputted code can contain any char and not only digits from 0 to 9. If the input parameter <b>`code`</b> contains non digits chars and `isCharsCode` is `false` the value will be ignored |
 | <b>`isPrevFocusableAfterClearing`</b> | boolean | true | When `true` after the input value deletion the caret will be moved to the previous input immediately. If `false` then after the input value deletion the caret will stay on the current input and be moved to the previous input only if the current input is empty |
