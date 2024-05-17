@@ -50,6 +50,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
   @Input() code ?: string | number;
   @Input() disabled !: boolean;
   @Input() autocapitalize ?: string;
+  @Input() isClearPreviousIfEmpty!: boolean;
 
   @Output() readonly codeChanged = new EventEmitter<string>();
   @Output() readonly codeCompleted = new EventEmitter<string>();
@@ -269,13 +270,18 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
       this.emitChanges();
     }
 
-    // preventing to focusing on the previous field if it does not exist or the delete key has been pressed
+    // preventing to focusing/clearing on the previous field if it does not exist or the delete key has been pressed
     if (prev < 0 || isDeleteKey) {
       return;
     }
 
     if (isTargetEmpty || this.isPrevFocusableAfterClearing) {
       this.inputs[prev].focus();
+    }
+
+
+    if (isTargetEmpty && this.isClearPreviousIfEmpty) {
+      this.setInputValue(this.inputs[prev], null);
     }
   }
 
