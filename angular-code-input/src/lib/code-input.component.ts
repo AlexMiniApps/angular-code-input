@@ -412,6 +412,9 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
     const isEmpty = this.isEmpty(value);
     const valueClassCSS = 'has-value';
     const emptyClassCSS = 'empty';
+    
+    input.select();
+    
     if (isEmpty) {
       input.value = '';
       input.classList.remove(valueClassCSS);
