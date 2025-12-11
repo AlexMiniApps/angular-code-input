@@ -21,13 +21,13 @@
   "private": false,
   "dependencies": {
     "@angular/animations": "^16.0.2",
-    "@angular/common": "^16.0.2",
+    "@angular/common": "^21.0.1",
     "@angular/compiler": "^16.0.2",
     "@angular/core": "^16.0.2",
-    "@angular/forms": "^16.0.2",
-    "@angular/platform-browser": "^16.0.2",
-    "@angular/platform-browser-dynamic": "^16.0.2",
-    "@angular/router": "^16.0.2",
+    "@angular/forms": "^21.0.1",
+    "@angular/platform-browser": "^21.0.1",
+    "@angular/platform-browser-dynamic": "^21.0.1",
+    "@angular/router": "^21.0.1",
     "rxjs": "^7.8.1",
     "tslib": "^2.5.2",
     "zone.js": "^0.13.0"
