@@ -239,6 +239,7 @@ export class CodeInputComponent implements AfterViewInit, OnInit, OnChanges, OnD
       if (!this.canInputValue(val)) {
         this.setInputValue(input, null);
         this.setStateForInput(input, InputState.reset);
+        this.emitChanges();
         return;
       }
 
